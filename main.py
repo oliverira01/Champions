@@ -1,9 +1,25 @@
 from Tanda import Tanda
 from Equipo import Equipo
 from Jugador import Jugador
+import time, os
 
 jugadores = []
 dorsales = []
+
+for i in range(1,4):
+    for j in range(1,4):
+        os.system("cls")
+        Tanda.animacionPortero(0,0)
+        Tanda.animacionLanzador(0, False)
+        time.sleep(2)
+        os.system("cls")
+        Tanda.animacionPortero(0,0)
+        Tanda.animacionLanzador(j, False)
+        time.sleep(2)
+        os.system("cls")
+        Tanda.animacionPortero(i,j)
+        Tanda.animacionLanzador(j, True)
+        time.sleep(2)
 
 nombre = input("Nombre del portero: ")
 dorsal_elegido = False
@@ -58,15 +74,8 @@ while True:
         print(f"Goool de {equipo_atacante.jugadores[indice_atacante].nombre}\n{equipo_jugador.nombre} {equipo_jugador.goles} - {equipo_bot.nombre} {equipo_bot.goles}")
     else:
         print(f"Paradon de {equipo_defensor.jugadores[indice_defensor].nombre}\n{equipo_jugador.nombre} {equipo_jugador.goles} - {equipo_bot.nombre} {equipo_bot.goles}")
-    match Tanda.comprobar_media_ronda(equipo_atacante, equipo_defensor, tiros):
-        case "equipo1":
-            ganador = equipo_atacante
-            break
-        case "equipo2":
-            ganador = equipo_defensor
-            break
-        case "empate":
-            pass
+    if Tanda.comprobar_media_ganador(equipo_atacante, equipo_defensor, tiros):
+        break
     if equipo_atacante == equipo_jugador:
         equipo_atacante = equipo_bot
         equipo_defensor = equipo_jugador
@@ -87,21 +96,20 @@ while True:
         print(f"Goool de {equipo_atacante.jugadores[indice_atacante].nombre}\n{equipo_jugador.nombre} {equipo_jugador.goles} - {equipo_bot.nombre} {equipo_bot.goles}")
     else:
         print(f"Paradon de {equipo_defensor.jugadores[indice_defensor].nombre}\n{equipo_jugador.nombre} {equipo_jugador.goles} - {equipo_bot.nombre} {equipo_bot.goles}")
-    match Tanda.comprobar_ganador(equipo_atacante, equipo_defensor, tiros):
-        case "equipo1":
-            ganador = equipo_atacante
-            break
-        case "equipo2":
-            ganador = equipo_defensor
-            break
-        case "empate":
-            pass
+    if Tanda.comprobar_ganador(equipo_atacante, equipo_defensor, tiros):
+        break
     if equipo_atacante == equipo_jugador:
         equipo_atacante = equipo_bot
         equipo_defensor = equipo_jugador
     else:
         equipo_atacante = equipo_jugador
         equipo_defensor = equipo_bot
+
+ganador = Tanda.comprobar_goles(equipo_jugador, equipo_bot)
+if ganador == 1:
+    ganador = equipo_jugador
+elif ganador == 2:
+    ganador = equipo_bot
 
 print("--------------------------------------------------------------")
 print(f"🏆 {ganador.nombre.upper()} GANADOR DE LA CHAMPIONS 🏆")

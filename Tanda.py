@@ -22,29 +22,137 @@ class Tanda:
                 jugador_defensor = i
                 break
         return (jugador_atacante, jugador_defensor)
-    
-    def comprobar_media_ronda(equipo1, equipo2, tiros):
-        if tiros >= 5 and (equipo2 > equipo1):
-            return "equipo2"
-        elif equipo1.goles == 4 and equipo2.goles == 1:
-            return "equipo1"
-        elif equipo2.goles == 4 and equipo1.goles == 1:
-            return "equipo2"
-        elif equipo1.goles == 5 and equipo2.goles == 3:
-            return "equipo1"
-        elif equipo1.goles == 0 and equipo2.goles == 3:
-            return "equipo2"
+
+    def comprobar_media_ganador(equipo1, equipo2, tiros):
+        if (equipo2.goles + (6 - tiros) == equipo1.goles) and tiros <= 5:
+            return True        
+        elif (equipo1.goles != equipo2.goles) and tiros > 5:
+            return True
         else:
-            return "empate"
+            return False
 
     def comprobar_ganador(equipo1, equipo2, tiros):
-        if equipo1.goles - 3 == equipo2.goles:
-            return "equipo1"
-        elif equipo2.goles -3 == equipo1.goles:
-            return "equipo2"
-        elif (equipo1.goles > equipo2.goles) and (tiros > 5):
-            return "equipo1"
-        elif (equipo2.goles > equipo1.goles) and (tiros > 5):
-            return "equipo2"
+        if (equipo1.goles + (6 - tiros) == equipo2.goles) and tiros <= 5:
+            return True        
+        elif (equipo1.goles != equipo2.goles) and tiros > 5:
+            return True
         else:
-            return "empate"
+            return False
+        
+    def comprobar_goles(equipo1, equipo2):
+        if equipo1.goles > equipo2.goles:
+            return 1
+        elif equipo2.goles > equipo1.goles:
+            return 2
+        else:
+            return 0
+        
+    def animacionPortero(portero, lanzador):
+        print(f"Y bajo palos, con el dorsal{portero.dorsal}")
+        print(f"{portero.nombre.upper()}")
+        if (portero.movimiento == 0):
+            print("╔═════════════════════╗")
+            print("║                     ║")
+            print("║         ☻           ║")
+            print("║        /|\\          ║")
+            print("║        / \\          ║")
+        elif (portero.movimiento == 1 and lanzador.movimiento == 1):
+            print("╔═════════════════════╗")
+            print("║                     ║")
+            print("║   ☻                 ║")
+            print("║   \\O\\               ║")
+            print("║    \\ \\              ║")
+        elif (portero.movimiento == 1 and lanzador.movimiento == 2):
+            print("╔═════════════════════╗")
+            print("║                     ║")
+            print("║  \\☻\\     O          ║")
+            print("║    \\                ║")
+            print("║    \\ \\              ║")
+        elif (portero.movimiento == 1 and lanzador.movimiento == 3):
+            print("╔═════════════════════╗")
+            print("║                     ║")
+            print("║  \\☻\\            O   ║")
+            print("║    \\                ║")
+            print("║    \\ \\              ║")
+        elif (portero.movimiento == 2 and lanzador.movimiento == 1):
+            print("╔═════════════════════╗")
+            print("║                     ║")
+            print("║   O    \\☻/          ║")
+            print("║         |           ║")
+            print("║        / \\          ║")
+        elif (portero.movimiento == 2 and lanzador.movimiento == 2):
+            print("╔═════════════════════╗")
+            print("║                     ║")
+            print("║         ☻           ║")
+            print("║        \\O/          ║")
+            print("║        / \\          ║")
+        elif (portero.movimiento == 2 and lanzador.movimiento == 3):
+            print("╔═════════════════════╗")
+            print("║                     ║")
+            print("║        \\☻/      O   ║")
+            print("║         |           ║")
+            print("║        / \\          ║")
+        elif (portero.movimiento == 3 and lanzador.movimiento == 1):
+            print("╔═════════════════════╗")
+            print("║                     ║")
+            print("║   O           /☻/   ║")
+            print("║               /     ║")
+            print("║             / /     ║")
+        elif (portero.movimiento == 3 and lanzador.movimiento == 2):
+            print("╔═════════════════════╗")
+            print("║                     ║")
+            print("║         O     /☻/   ║")
+            print("║               /     ║")
+            print("║             / /     ║")
+        elif (portero.movimiento == 3 and lanzador.movimiento == 3):
+            print("╔═════════════════════╗")
+            print("║                     ║")
+            print("║                ☻    ║")
+            print("║              /O/    ║")
+            print("║             / /     ║")
+
+    def animacionLanzador(lanzador, fueraBola):
+        if (lanzador == 0):
+            print("                       ")
+            print("                       ")
+            print("          ●            ")
+            print("         /|\\           ")
+            print("         / \\           ")
+        elif (lanzador.movimiento == 1 and fueraBola == False):
+            print("      O                ")
+            print("                       ")
+            print("         \●            ")
+            print("         \|\            ")
+            print("           |           ")
+        elif (lanzador.movimiento == 2 and fueraBola == False):
+            print("          O            ")
+            print("                       ")
+            print("          ●            ")
+            print("         /|\\           ")
+            print("         / L           ")
+        elif (lanzador.movimiento == 3 and fueraBola == False):
+            print("              O        ")
+            print("                       ")
+            print("          ●/           ")
+            print("         /|/           ")
+            print("         |             ")
+        elif (lanzador.movimiento == 1 and fueraBola == True):
+            print("                       ")
+            print("                       ")
+            print("         \●            ")
+            print("         \|\            ")
+            print("           |           ")
+        elif (lanzador.movimiento == 2 and fueraBola == True):
+            print("                       ")
+            print("                       ")
+            print("          ●            ")
+            print("         /|\\           ")
+            print("         / L           ")
+        elif (lanzador.movimiento == 3 and fueraBola == True):
+            print("                       ")
+            print("                       ")
+            print("          ●/           ")
+            print("         /|/           ")
+            print("         |             ")
+        print(f"Para batir la porteria, con el dorsal{lanzador.dorsal}")
+        print(f"{lanzador.nombre.upper()}")

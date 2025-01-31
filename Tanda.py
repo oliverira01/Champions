@@ -1,4 +1,4 @@
-import random
+import random, os, time
 class Tanda:
     
     def comparar_equipos(jugador1, jugador2):
@@ -23,22 +23,14 @@ class Tanda:
                 break
         return (jugador_atacante, jugador_defensor)
 
-    def comprobar_media_ganador(equipo1, equipo2, tiros):
-        if (equipo2.goles + (6 - tiros) == equipo1.goles) and tiros <= 5:
-            return True        
-        elif (equipo1.goles != equipo2.goles) and tiros > 5:
+    def comprobar_ganador(equipo1, equipo2, tiros):  
+        if equipo1.goles > equipo2.goles + (5 - tiros):
+            return True
+        elif equipo2.goles > equipo1.goles + (5 - tiros):
             return True
         else:
             return False
 
-    def comprobar_ganador(equipo1, equipo2, tiros):
-        if (equipo1.goles + (6 - tiros) == equipo2.goles) and tiros <= 5:
-            return True        
-        elif (equipo1.goles != equipo2.goles) and tiros > 5:
-            return True
-        else:
-            return False
-        
     def comprobar_goles(equipo1, equipo2):
         if equipo1.goles > equipo2.goles:
             return 1
@@ -47,10 +39,10 @@ class Tanda:
         else:
             return 0
         
-    def animacionPortero(portero, lanzador):
+    def animacionPortero(portero, lanzador, quieto):
         print(f"Y bajo palos, con el dorsal{portero.dorsal}")
         print(f"{portero.nombre.upper()}")
-        if (portero.movimiento == 0):
+        if (quieto):
             print("╔═════════════════════╗")
             print("║                     ║")
             print("║         ☻           ║")
@@ -111,8 +103,8 @@ class Tanda:
             print("║              /O/    ║")
             print("║             / /     ║")
 
-    def animacionLanzador(lanzador, fueraBola):
-        if (lanzador == 0):
+    def animacionLanzador(lanzador, fueraBola, quieto):
+        if (quieto):
             print("                       ")
             print("                       ")
             print("          ●            ")
@@ -122,7 +114,7 @@ class Tanda:
             print("      O                ")
             print("                       ")
             print("         \●            ")
-            print("         \|\            ")
+            print("         \\|\\            ")
             print("           |           ")
         elif (lanzador.movimiento == 2 and fueraBola == False):
             print("          O            ")
@@ -140,7 +132,7 @@ class Tanda:
             print("                       ")
             print("                       ")
             print("         \●            ")
-            print("         \|\            ")
+            print("         \\|\\            ")
             print("           |           ")
         elif (lanzador.movimiento == 2 and fueraBola == True):
             print("                       ")
@@ -156,3 +148,17 @@ class Tanda:
             print("         |             ")
         print(f"Para batir la porteria, con el dorsal{lanzador.dorsal}")
         print(f"{lanzador.nombre.upper()}")
+
+    def animaciones(equipo_atacante, equipo_defensor, indice_atacante, indice_defensor):
+        os.system("cls")
+        Tanda.animacionPortero(equipo_defensor.jugadores[indice_defensor], equipo_atacante.jugadores[indice_atacante], True)
+        Tanda.animacionLanzador(equipo_atacante.jugadores[indice_atacante], False, True)
+        time.sleep(2)
+        os.system("cls")
+        Tanda.animacionPortero(equipo_defensor.jugadores[indice_defensor], equipo_atacante.jugadores[indice_atacante], True)
+        Tanda.animacionLanzador(equipo_atacante.jugadores[indice_atacante], False, False)
+        time.sleep(2)
+        os.system("cls")
+        Tanda.animacionPortero(equipo_defensor.jugadores[indice_defensor], equipo_atacante.jugadores[indice_atacante], False)
+        Tanda.animacionLanzador(equipo_atacante.jugadores[indice_atacante], True, False)
+        time.sleep(2)

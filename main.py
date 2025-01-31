@@ -6,21 +6,6 @@ import time, os
 jugadores = []
 dorsales = []
 
-for i in range(1,4):
-    for j in range(1,4):
-        os.system("cls")
-        Tanda.animacionPortero(0,0)
-        Tanda.animacionLanzador(0, False)
-        time.sleep(2)
-        os.system("cls")
-        Tanda.animacionPortero(0,0)
-        Tanda.animacionLanzador(j, False)
-        time.sleep(2)
-        os.system("cls")
-        Tanda.animacionPortero(i,j)
-        Tanda.animacionLanzador(j, True)
-        time.sleep(2)
-
 nombre = input("Nombre del portero: ")
 dorsal_elegido = False
 while dorsal_elegido == False:
@@ -69,12 +54,13 @@ while True:
     else:
         equipo_defensor.jugadores[indice_defensor].generar_movimiento()
         equipo_atacante.jugadores[indice_atacante].elegir_movimiento()
+    Tanda.animaciones(equipo_atacante, equipo_defensor, indice_atacante, indice_defensor)
     if Tanda.comparar_equipos(equipo_atacante.jugadores[indice_atacante], equipo_defensor.jugadores[indice_defensor]):
         equipo_atacante.goles += 1
         print(f"Goool de {equipo_atacante.jugadores[indice_atacante].nombre}\n{equipo_jugador.nombre} {equipo_jugador.goles} - {equipo_bot.nombre} {equipo_bot.goles}")
     else:
         print(f"Paradon de {equipo_defensor.jugadores[indice_defensor].nombre}\n{equipo_jugador.nombre} {equipo_jugador.goles} - {equipo_bot.nombre} {equipo_bot.goles}")
-    if Tanda.comprobar_media_ganador(equipo_atacante, equipo_defensor, tiros):
+    if Tanda.comprobar_ganador(equipo_atacante, equipo_defensor, tiros):
         break
     if equipo_atacante == equipo_jugador:
         equipo_atacante = equipo_bot
@@ -91,6 +77,7 @@ while True:
     else:
         equipo_defensor.jugadores[indice_defensor].generar_movimiento()
         equipo_atacante.jugadores[indice_atacante].elegir_movimiento()
+    Tanda.animaciones(equipo_atacante, equipo_defensor, indice_atacante, indice_defensor)
     if Tanda.comparar_equipos(equipo_atacante.jugadores[indice_atacante], equipo_defensor.jugadores[indice_defensor]):
         equipo_atacante.goles += 1
         print(f"Goool de {equipo_atacante.jugadores[indice_atacante].nombre}\n{equipo_jugador.nombre} {equipo_jugador.goles} - {equipo_bot.nombre} {equipo_bot.goles}")

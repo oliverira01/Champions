@@ -1,18 +1,18 @@
 import random, os, time
 class Tanda:
     
-    def comparar_equipos(jugador1, jugador2):
-        if jugador1.movimiento == jugador2.movimiento:
+    def comparar_equipos(movimiento1: int, movimiento2: int) -> bool:
+        if movimiento1 == movimiento2:
             return False
         else:
             return True
         
-    def elegir_jugadores(equipo_atacante, equipo_defensor, tiros):
+    def elegir_jugadores(equipo_atacante, equipo_defensor, tiros: int):
         if tiros < 6:
             elegido = False
             while elegido == False:
-                jugador_atacante = random.randint(0,len(equipo_atacante.jugadores)-1)
-                if jugador_atacante not in equipo_atacante.lista_lanzadores:
+                jugador_atacante = random.randint(0,len(equipo_atacante["jugadores"])-1)
+                if jugador_atacante not in equipo_atacante["lista_lanzadores"]:
                     equipo_atacante.lista_lanzadores.append(jugador_atacante)
                     elegido = True
         else:
@@ -21,25 +21,25 @@ class Tanda:
             if equipo_defensor.jugadores[i].dorsal == 1 or equipo_defensor.jugadores[i].dorsal == 13:
                 jugador_defensor = i
                 break
-        return (jugador_atacante, jugador_defensor)
+        return (jugador_atacante, jugador_defensor, equipo_atacante["lista_lanzadores"])
 
-    def comprobar_ganador(equipo1, equipo2, tiros):  
-        if equipo1.goles > equipo2.goles + (5 - tiros):
+    def comprobar_ganador(goles_equipo1: int, goles_equipo2: int, tiros: int) -> bool:  
+        if goles_equipo1.goles > goles_equipo2.goles + (5 - tiros):
             return True
-        elif equipo2.goles > equipo1.goles + (5 - tiros):
+        elif goles_equipo2.goles > goles_equipo1.goles + (5 - tiros):
             return True
         else:
             return False
 
-    def comprobar_goles(equipo1, equipo2):
-        if equipo1.goles > equipo2.goles:
+    def comprobar_goles(goles_equipo1: int, goles_equipo2: int) -> int:
+        if goles_equipo1.goles > goles_equipo2.goles:
             return 1
-        elif equipo2.goles > equipo1.goles:
+        elif goles_equipo2.goles > goles_equipo1.goles:
             return 2
         else:
             return 0
         
-    def animacionPortero(portero, lanzador, quieto):
+    def animacion_portero(portero: int, lanzador: int, quieto: bool) -> None:
         print(f"Y bajo palos, con el dorsal{portero.dorsal}")
         print(f"{portero.nombre.upper()}")
         if (quieto):
@@ -103,7 +103,7 @@ class Tanda:
             print("║              /O/    ║")
             print("║             / /     ║")
 
-    def animacionLanzador(lanzador, fueraBola, quieto):
+    def animacion_lanzador(lanzador: int, fueraBola: bool, quieto: bool) -> None:
         if (quieto):
             print("                       ")
             print("                       ")

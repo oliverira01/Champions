@@ -6,7 +6,7 @@ class Equipo:
     humano: bool
     lista_lanzadores: list
 
-    def __init__(self, nombre: str, estadio: str, jugadores: list, humano: bool):
+    def __init__(self, nombre: str, estadio: str, jugadores: list, humano: bool) -> None:
         self.nombre = nombre
         self.estadio = estadio
         self.jugadores = jugadores

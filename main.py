@@ -44,7 +44,7 @@ equipo_defensor = equipo_bot
 tiros = 0
 
 while True:
-    indice_atacante, indice_defensor, equipo_atacante.lista_lanzadores = Tanda.elegir_jugadores({"lista_lanzadores": equipo_atacante.lista_lanzadores, "jugadores": equipo_atacante.jugadores}: dict, {"lista_lanzadores": equipo_defensor.lista_lanzadores, "jugadores": equipo_defensor.jugadores}: dict, tiros)
+    indice_atacante, indice_defensor, equipo_atacante.lista_lanzadores = Tanda.elegir_jugadores({"lista_lanzadores": equipo_atacante.lista_lanzadores, "jugadores": equipo_atacante.jugadores}, {"lista_lanzadores": equipo_defensor.lista_lanzadores, "jugadores": equipo_defensor.jugadores}, tiros)
     print("--------------------------------------------------------------")
     print(f"RONDA {tiros + 1} | Portero: {equipo_defensor.jugadores[indice_defensor].nombre} | Lanzador: {equipo_atacante.jugadores[indice_atacante].nombre}")
     tiros += 1
@@ -54,7 +54,7 @@ while True:
     else:
         equipo_defensor.jugadores[indice_defensor].generar_movimiento()
         equipo_atacante.jugadores[indice_atacante].elegir_movimiento()
-    Tanda.animaciones(equipo_atacante, equipo_defensor, indice_atacante, indice_defensor)
+    Tanda.animaciones(equipo_atacante.jugadores, equipo_defensor.jugadores, indice_atacante, indice_defensor)
     if Tanda.comparar_equipos(equipo_atacante.jugadores[indice_atacante].movimiento, equipo_defensor.jugadores[indice_defensor].movimiento):
         equipo_atacante.goles += 1
         print(f"Goool de {equipo_atacante.jugadores[indice_atacante].nombre}\n{equipo_jugador.nombre} {equipo_jugador.goles} - {equipo_bot.nombre} {equipo_bot.goles}")
@@ -68,7 +68,7 @@ while True:
     else:
         equipo_atacante = equipo_jugador
         equipo_defensor = equipo_bot
-    indice_atacante, indice_defensor, equipo_atacante.lista_lanzadores = Tanda.elegir_jugadores({"lista_lanzadores": equipo_atacante.lista_lanzadores, "jugadores": equipo_atacante.jugadores}: dict, {"lista_lanzadores": equipo_defensor.lista_lanzadores, "jugadores": equipo_defensor.jugadores}: dict, tiros)
+    indice_atacante, indice_defensor, equipo_atacante.lista_lanzadores = Tanda.elegir_jugadores({"lista_lanzadores": equipo_atacante.lista_lanzadores, "jugadores": equipo_atacante.jugadores}, {"lista_lanzadores": equipo_defensor.lista_lanzadores, "jugadores": equipo_defensor.jugadores}, tiros)
     print("--------------------------------------------------------------")
     print(f"Portero: {equipo_defensor.jugadores[indice_defensor].nombre} | Lanzador: {equipo_atacante.jugadores[indice_atacante].nombre}")
     if not equipo_atacante.humano:
@@ -77,13 +77,13 @@ while True:
     else:
         equipo_defensor.jugadores[indice_defensor].generar_movimiento()
         equipo_atacante.jugadores[indice_atacante].elegir_movimiento()
-    Tanda.animaciones(equipo_atacante, equipo_defensor, indice_atacante, indice_defensor)
+    Tanda.animaciones(equipo_atacante.jugadores, equipo_defensor.jugadores, indice_atacante, indice_defensor)
     if Tanda.comparar_equipos(equipo_atacante.jugadores[indice_atacante].movimiento, equipo_defensor.jugadores[indice_defensor].movimiento):
         equipo_atacante.goles += 1
         print(f"Goool de {equipo_atacante.jugadores[indice_atacante].nombre}\n{equipo_jugador.nombre} {equipo_jugador.goles} - {equipo_bot.nombre} {equipo_bot.goles}")
     else:
         print(f"Paradon de {equipo_defensor.jugadores[indice_defensor].nombre}\n{equipo_jugador.nombre} {equipo_jugador.goles} - {equipo_bot.nombre} {equipo_bot.goles}")
-    if Tanda.comprobar_ganador(equipo_atacante, equipo_defensor, tiros):
+    if Tanda.comprobar_ganador(equipo_atacante.goles, equipo_defensor.goles, tiros):
         break
     if equipo_atacante == equipo_jugador:
         equipo_atacante = equipo_bot

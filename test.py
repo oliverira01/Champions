@@ -191,4 +191,4 @@ for i in lista:
         booleanos["False"] += 1
 print(booleanos)
 
-print(Tanda.comprobar_ganador())
+print(Tanda.comprobar_ganador(2,4,4))

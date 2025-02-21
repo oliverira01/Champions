@@ -25,35 +25,34 @@ def ciclo(equipo_atacante, equipo_defensor, tiros):
 jugadores = []
 dorsales = []
 
-# nombre = input("Nombre del portero: ")
-# dorsal_elegido = False
-# while dorsal_elegido == False:
-#     dorsal = int(input("Dorsal del portero (obligatorio 1 o 13): "))
-#     if dorsal ==  1 or dorsal == 13 :
-#         dorsales.append(dorsal)
-#         dorsal_elegido = True
-#         break
-#     print("Dorsal diferente de 1 o 13")
-# jugador = Jugador(nombre, dorsal)
-# jugadores.append(jugador)
+nombre = input("Nombre del portero: ")
+dorsal_elegido = False
+while dorsal_elegido == False:
+    dorsal = int(input("Dorsal del portero (obligatorio 1 o 13): "))
+    if dorsal ==  1 or dorsal == 13 :
+        dorsales.append(dorsal)
+        dorsal_elegido = True
+        break
+    print("Dorsal diferente de 1 o 13")
+jugador = Jugador(nombre, dorsal)
+jugadores.append(jugador)
 
-# for i in range(5):
-#     nombre = input("Nombre del jugador: ")
-#     dorsal_elegido = False
-#     while dorsal_elegido == False:
-#         dorsal = int(input("Dorsal del jugador: "))
-#         if dorsal not in dorsales:
-#             dorsales.append(dorsal)
-#             dorsal_elegido = True
-#             break
-#         print("Dorsal ya escogido")
-#     jugador = Jugador(nombre, dorsal)
-#     jugadores.append(jugador)
+for i in range(5):
+    nombre = input("Nombre del jugador: ")
+    dorsal_elegido = False
+    while dorsal_elegido == False:
+        dorsal = int(input("Dorsal del jugador: "))
+        if dorsal not in dorsales:
+            dorsales.append(dorsal)
+            dorsal_elegido = True
+            break
+        print("Dorsal ya escogido")
+    jugador = Jugador(nombre, dorsal)
+    jugadores.append(jugador)
 
 nombre_equipo = input(f"Dime el nombre de tu equipo: ")
 nombre_estadio = input(f"Dime en que estadio juega tu equipo: ")
-# equipo_jugador = Equipo(nombre_equipo, nombre_estadio, jugadores, True)
-equipo_jugador = Equipo(nombre_equipo, nombre_estadio, [Jugador("Pedro 🏥🚑", 7),Jugador("Darwin Núñez", 9),Jugador("Salah", 11),Jugador("Alexander Arnold", 66),Jugador("Van Dijk", 4),Jugador("Alisson", 1)], True)
+equipo_jugador = Equipo(nombre_equipo, nombre_estadio, jugadores, True)
 
 jugadores_bot = [Jugador("Pedro 🏥🚑", 7),Jugador("Darwin Núñez", 9),Jugador("Salah", 11),Jugador("Alexander Arnold", 66),Jugador("Van Dijk", 4),Jugador("Alisson", 1)]
 equipo_bot = Equipo("Liverpool", "Anfield", jugadores_bot, False)
